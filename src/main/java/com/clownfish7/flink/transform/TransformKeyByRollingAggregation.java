@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 /**
  * classname TransformKeyByRollingAggregation
- * description TODO
+ * description KeyByRollingAggregation Max
  * create 2021-12-22 16:13
  */
 public class TransformKeyByRollingAggregation {

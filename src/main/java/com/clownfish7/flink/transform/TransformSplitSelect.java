@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 /**
  * classname TransformSplitSelect
- * description Split Api 已被官方移除！！！
+ * description Split & Select Api 已被官方移除！！！
  * create 2021-12-22 17:20
  */
 public class TransformSplitSelect {

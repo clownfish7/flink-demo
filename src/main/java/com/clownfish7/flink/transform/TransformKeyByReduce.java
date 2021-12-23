@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 /**
  * classname TransformKeyByReduce
- * description TODO
+ * description KeyByReduce
  * create 2021-12-22 16:40
  */
 public class TransformKeyByReduce {
