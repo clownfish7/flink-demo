@@ -22,6 +22,7 @@ public class SourceKafka {
         properties.setProperty("bootstrap.servers", "192.168.0.24:9092");
         properties.setProperty("group.id", "test");
 
+        // 过时
         FlinkKafkaConsumer<String> flinkKafkaConsumer = new FlinkKafkaConsumer<>(
                 "flink", new SimpleStringSchema(), properties);
 //        flinkKafkaConsumer.setStartFromEarliest();     // 尽可能从最早的记录开始
