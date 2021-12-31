@@ -20,7 +20,7 @@ public class SinkKafka {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
 
-        DataStream<String> stream = env.fromElements("stream1");
+        DataStream<String> stream = env.fromElements("stream1", "stream1", "stream1");
 
         Properties properties = new Properties();
         properties.setProperty("bootstrap.servers", "192.168.0.24:9092");

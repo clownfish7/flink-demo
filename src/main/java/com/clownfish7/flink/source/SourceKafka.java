@@ -40,14 +40,15 @@ public class SourceKafka {
         KafkaSource<String> source = KafkaSource.<String>builder()
                 .setBootstrapServers("192.168.0.24:9092")
                 .setGroupId("MyGroup")
-                .setTopics(Arrays.asList("TOPIC1", "TOPIC2"))
+//                .setTopics(Arrays.asList("TOPIC1", "TOPIC2"))
+                .setTopics(Arrays.asList("flink"))
                 .setDeserializer(KafkaRecordDeserializationSchema.of(
                         new KafkaDeserializationSchemaWrapper(new SimpleStringSchema()))
                 )
                 .setStartingOffsets(OffsetsInitializer.earliest())
                 .build();
 
-        env.fromSource(source, WatermarkStrategy.noWatermarks(), "kafkaSourceName");
+        env.fromSource(source, WatermarkStrategy.noWatermarks(), "kafkaSourceName").print();
 
         DataStream<String> dataStream = env.addSource(flinkKafkaConsumer);
 
