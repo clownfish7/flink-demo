@@ -1,6 +1,7 @@
 package com.clownfish7.flink.sink;
 
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
+import org.apache.flink.connector.base.DeliveryGuarantee;
 import org.apache.flink.connector.kafka.sink.KafkaRecordSerializationSchemaBuilder;
 import org.apache.flink.connector.kafka.sink.KafkaSink;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -31,6 +32,7 @@ public class SinkKafka {
         // 新方法
         KafkaSink<String> sink = KafkaSink.builder()
                 .setBootstrapServers("192.168.0.24:9092")
+                .setDeliverGuarantee(DeliveryGuarantee.EXACTLY_ONCE)
                 .setRecordSerializer(
                         new KafkaRecordSerializationSchemaBuilder()
                                 .setTopic("flink")
