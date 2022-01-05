@@ -1,4 +1,4 @@
-package com.clownfish7.flink.source;
+package com.clownfish7.flink.datastream.source;
 
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;

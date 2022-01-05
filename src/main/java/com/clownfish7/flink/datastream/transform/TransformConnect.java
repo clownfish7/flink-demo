@@ -1,4 +1,4 @@
-package com.clownfish7.flink.transform;
+package com.clownfish7.flink.datastream.transform;
 
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.ConnectedStreams;

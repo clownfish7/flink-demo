@@ -1,4 +1,4 @@
-package com.clownfish7.flink.source;
+package com.clownfish7.flink.datastream.source;
 
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

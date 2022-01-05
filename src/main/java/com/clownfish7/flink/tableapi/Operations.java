@@ -1,0 +1,111 @@
+package com.clownfish7.flink.tableapi;
+
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.table.api.*;
+import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
+import org.apache.flink.types.Row;
+
+import static org.apache.flink.table.api.Expressions.*;
+
+/**
+ * classname Operations
+ * create 2022-01-05 11:22
+ */
+public class Operations {
+    public static void main(String[] args) {
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.createLocalEnvironment();
+        TableEnvironment tableEnv = StreamTableEnvironment.create(env);
+
+        // create
+        EnvironmentSettings settings = EnvironmentSettings.newInstance()
+                .inStreamingMode()
+                .build();
+
+        TableEnvironment tEnv = TableEnvironment.create(settings);
+
+        // 1. From  // 和 SQL 查询的 FROM 子句类似。 执行一个注册过的表的扫描。
+        // support: Batch Streaming
+        tEnv.from("Orders");
+
+        // 2. FromValues  // 和 SQL 查询中的 VALUES 子句类似。 基于提供的行生成一张内联表。 你可以使用 row(...) 表达式创建复合行：
+        // support: Batch Streaming
+        tEnv.fromValues(
+                DataTypes.ROW(
+                        DataTypes.FIELD("id", DataTypes.DECIMAL(10, 2)),
+                        DataTypes.FIELD("name", DataTypes.STRING())
+                ),
+                Row.of(1, "ABC"),
+                Row.of(2L, "ABCDE")
+        );
+
+        // 3. Select
+        // support: Batch Streaming
+        Table orders = tableEnv.from("Orders");
+        Table result = orders.select($("a"), $("c").as("d"));
+
+        // 4. As
+        // support: Batch Streaming
+        result = orders.as("x, y, z, t");
+
+        // 5. Where/Filter
+        // support: Batch Streaming
+        orders.where($("b").isEqual("red"));
+        orders.filter($("b").isEqual("red"));
+
+        // 6. AddColumns 执行字段添加操作。 如果所添加的字段已经存在，将抛出异常
+        // support: Batch Streaming
+        orders.addColumns(concat($("c"), "sunny"));
+
+        // 7. AddOrReplaceColumns
+        // support: Batch Streaming
+        orders.addOrReplaceColumns(concat($("c"), "sunny").as("desc"));
+
+        // 8. DropColumns
+        // support: Batch Streaming
+        orders.dropColumns($("b"), $("c"));
+
+        // 9. RenameColumns
+        // support: Batch Streaming
+        orders.renameColumns($("b").as("b2"), $("c").as("c2"));
+
+        // 10. Aggregations
+        // 10.1 GroupBy Aggregation 和 SQL 的 GROUP BY 子句类似。 使用分组键对行进行分组，使用伴随的聚合算子来按照组进行聚合行。
+        // support: Batch Streaming ResultUpdating
+        orders.groupBy($("a")).select($("a"), $("b").sum().as("d"));
+
+        // 10.2 GroupBy Window Aggregation 使用分组窗口结合单个或者多个分组键对表进行分组和聚合。
+        // support: Batch Streaming
+        orders
+                // 定义窗口
+                .window(Tumble.over(lit(5).minutes()).on($("rowtime")).as("w"))
+                // 按窗口和键分组
+                .groupBy($("a"), $("w"))
+                // 访问窗口属性并聚合
+                .select(
+                        $("a"),
+                        $("w").start(),
+                        $("w").end(),
+                        $("w").rowtime(),
+                        $("b").sum().as("d")
+                );
+
+
+        // 10.3 Over Window Aggregation 和 SQL 的 OVER 子句类似。 更多细节详见 over windows section
+
+        // 10.4 Distinct Aggregation
+
+        // 11. Distinct 和 SQL 的 DISTINCT 子句类似。 返回具有不同组合值的记录。
+        // support: Batch Streaming ResultUpdating
+        orders.distinct();
+
+        // 12. Joins
+
+        // 10.
+
+        // 10.
+
+        // 10.
+
+        // 10.
+    }
+}

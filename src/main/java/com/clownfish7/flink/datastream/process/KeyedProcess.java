@@ -1,4 +1,4 @@
-package com.clownfish7.flink.process;
+package com.clownfish7.flink.datastream.process;
 
 import com.clownfish7.flink.pojo.User;
 import org.apache.flink.configuration.Configuration;

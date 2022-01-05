@@ -1,4 +1,4 @@
-package com.clownfish7.flink.sink;
+package com.clownfish7.flink.datastream.sink;
 
 import org.apache.flink.connector.jdbc.JdbcConnectionOptions;
 import org.apache.flink.connector.jdbc.JdbcSink;

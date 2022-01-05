@@ -1,15 +1,16 @@
-package com.clownfish7.flink.transform;
+package com.clownfish7.flink.datastream.transform;
 
+import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 import java.time.LocalDateTime;
 
 /**
- * classname TransformSplitSelect
- * description Split & Select Api 已被官方移除！！！
- * create 2021-12-22 17:20
+ * classname TransformKeyByReduce
+ * description KeyByReduce
+ * create 2021-12-22 16:40
  */
-public class TransformSplitSelect {
+public class TransformKeyByReduce {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
@@ -25,6 +26,14 @@ public class TransformSplitSelect {
                         new TransformKeyByRollingAggregation.User(LocalDateTime.now().minusDays(8), "user2", 19),
                         new TransformKeyByRollingAggregation.User(LocalDateTime.now().minusDays(9), "user3", 20)
                 )
+                .keyBy(TransformKeyByRollingAggregation.User::getName)
+                .reduce((ReduceFunction<TransformKeyByRollingAggregation.User>) (value1, value2) -> {
+                    TransformKeyByRollingAggregation.User user = new TransformKeyByRollingAggregation.User();
+                    user.setLocalDateTime(value2.getLocalDateTime());
+                    user.setName(value1.getName());
+                    user.setAge(Math.max(value1.getAge(), value2.getAge()));
+                    return user;
+                })
                 .print();
 
         env.execute();

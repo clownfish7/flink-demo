@@ -1,6 +1,6 @@
-package com.clownfish7.flink.window;
+package com.clownfish7.flink.datastream.window;
 
-import com.clownfish7.flink.transform.TransformKeyByRollingAggregation;
+import com.clownfish7.flink.datastream.transform.TransformKeyByRollingAggregation;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.WindowedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

@@ -1,4 +1,4 @@
-package com.clownfish7.flink.sink;
+package com.clownfish7.flink.datastream.sink;
 
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.connector.base.DeliveryGuarantee;

@@ -1,4 +1,4 @@
-package com.clownfish7.flink.state;
+package com.clownfish7.flink.datastream.state;
 
 import com.clownfish7.flink.pojo.User;
 import org.apache.flink.api.common.functions.ReduceFunction;

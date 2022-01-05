@@ -1,4 +1,4 @@
-package com.clownfish7.flink.transform;
+package com.clownfish7.flink.datastream.transform;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;

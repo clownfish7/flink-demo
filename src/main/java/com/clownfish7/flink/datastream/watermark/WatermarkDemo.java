@@ -1,4 +1,4 @@
-package com.clownfish7.flink.watermark;
+package com.clownfish7.flink.datastream.watermark;
 
 import com.clownfish7.flink.pojo.User;
 import org.apache.flink.api.common.eventtime.*;
