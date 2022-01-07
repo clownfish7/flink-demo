@@ -5,7 +5,7 @@ import org.apache.flink.table.api.*;
 
 /**
  * classname DataGenConnector
- * description TODO
+ * description 数据生成器
  * create 2022-01-05 16:48
  */
 public class DataGenConnector {

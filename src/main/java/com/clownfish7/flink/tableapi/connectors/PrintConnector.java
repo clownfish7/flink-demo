@@ -6,7 +6,7 @@ import org.apache.flink.types.Row;
 
 /**
  * classname PrintConnector
- * description TODO
+ * description 控制台连接器
  * create 2022-01-05 15:53
  */
 public class PrintConnector {

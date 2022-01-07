@@ -91,8 +91,30 @@ public class Operations {
 
 
         // 10.3 Over Window Aggregation 和 SQL 的 OVER 子句类似。 更多细节详见 over windows section
+        // 按属性分组后的的互异（互不相同、去重）聚合
+        orders
+                .groupBy($("a"))
+                .select($("a"), $("b").sum().distinct().as("d"));
+        // 按属性、时间窗口分组后的互异（互不相同、去重）聚合
+        orders
+                .window(Tumble.over(lit(5).minutes()).on($("rowtime")).as("w"))
+                .groupBy($("a"), $("w"))
+                .select($("a"), $("b").sum().distinct().as("d"));
+        // over window 上的互异（互不相同、去重）聚合
+        orders
+                .window(Over
+                        .partitionBy($("a"))
+                        .orderBy($("rowtime"))
+                        .preceding(UNBOUNDED_RANGE)
+                        .as("w"))
+                .select($("a"), $("b").avg().distinct().over($("w")),
+                        $("b").max().over($("w")),
+                        $("b").min().over($("w")));
 
         // 10.4 Distinct Aggregation
+        // 和 SQL DISTINCT 聚合子句类似，例如 COUNT(DISTINCT a)。 Distinct 聚合声明的聚合函数（内置或用户定义的）
+        // 仅应用于互不相同的输入值。 Distinct 可以应用于 GroupBy Aggregation、GroupBy Window Aggregation 和 Over Window Aggregation。
+
 
         // 11. Distinct 和 SQL 的 DISTINCT 子句类似。 返回具有不同组合值的记录。
         // support: Batch Streaming ResultUpdating
@@ -107,5 +129,7 @@ public class Operations {
         // 10.
 
         // 10.
+
+
     }
 }
