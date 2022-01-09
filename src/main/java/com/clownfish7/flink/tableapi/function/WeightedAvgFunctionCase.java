@@ -1,11 +1,8 @@
 package com.clownfish7.flink.tableapi.function;
 
-import org.apache.flink.table.api.DataTypes;
-import org.apache.flink.table.api.EnvironmentSettings;
-import org.apache.flink.table.api.Table;
-import org.apache.flink.table.api.TableEnvironment;
+import org.apache.flink.table.api.*;
 
-import static org.apache.flink.table.api.Expressions.row;
+import static org.apache.flink.table.api.Expressions.*;
 
 /**
  * classname WeightedAvgFunctionCase
@@ -43,5 +40,12 @@ public class WeightedAvgFunctionCase {
                 .print()
         ;
 
+        dataTable
+                .groupBy($("id"))
+                .aggregate(call("wAvgFunc", $("points"), $("level")).as("avgPoints"))
+                .select($("*"))
+                .executeInsert(
+                        TableDescriptor.forConnector("print").build()
+                );
     }
 }

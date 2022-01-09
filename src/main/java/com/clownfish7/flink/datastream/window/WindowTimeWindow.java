@@ -74,6 +74,7 @@ public class WindowTimeWindow {
         // other api
         // 允许迟到数据
         window.allowedLateness(Time.seconds(1));
+//        window.evictor()
         // 其他迟到数据处理
         OutputTag<String> outputTag = new OutputTag<>("lateTag");
         window.sideOutputLateData(outputTag)
