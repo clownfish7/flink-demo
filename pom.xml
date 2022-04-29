@@ -89,6 +89,20 @@
             <artifactId>flink-cep_2.11</artifactId>
             <version>1.14.2</version>
         </dependency>
+
+
+        <!-- cdc -->
+        <!-- https://mvnrepository.com/artifact/com.ververica/flink-connector-mysql-cdc -->
+        <!--<dependency>
+            <groupId>com.ververica</groupId>
+            <artifactId>flink-connector-mysql-cdc</artifactId>
+            <version>2.2.1</version>
+        </dependency>-->
+        <dependency>
+            <groupId>com.ververica</groupId>
+            <artifactId>flink-sql-connector-mysql-cdc</artifactId>
+            <version>2.2.1</version>
+        </dependency>
     </dependencies>
 
 </project>
